@@ -20,11 +20,14 @@ class Header extends Component {
             default:
                 return [
                     <li
+                        key="0"
                         style={{ margin : '5px' }}
                     >
                         <img src={this.props.auth.googlePhotoURL} alt="photoURL"/>
                     </li>,
-                    <li key="1">
+                    <li
+                        key="1"
+                    >
                         <a href={URL_API_LOGOUT}>Logout</a>
                     </li>,
                     <li
