@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import { reduxForm, Field, reset } from 'redux-form';
 import SurveyField from './SurveyField';
 import { Link } from 'react-router-dom';
 import validateEmails from '../../utils/validateEmails';
-
-const FIELDS = [
-    { label : "Subject Title", name : "title"},
-    { label : "Subject Line", name : "subject" },
-    { label : "Email Body", name : "body" },
-    { label : "Recipient List", name : "emails" }
-];
+import formFields from './formFields';
 
 class SurveyForm extends Component {
     constructor(props) {
@@ -19,7 +14,7 @@ class SurveyForm extends Component {
     renderFields() {
         return (
             <div>
-                {FIELDS.map(({ label, name}) =>
+                {formFields.map(({ label, name}) =>
                     <Field
                         key={name}
                         type="text"
@@ -38,9 +33,12 @@ class SurveyForm extends Component {
                     {this.renderFields()}
                     <Link
                         to="/surveys"
-                        className="red btn-flat left white-text"
                     >
-                        Cancel
+                        <button
+                            className="red btn-flat left white-text"
+                        >
+                            Cancel
+                        </button>
                     </Link>
                     <button
                         type="submit"
@@ -58,16 +56,21 @@ class SurveyForm extends Component {
 const validate = values => {
     const errors = {};
 
-    FIELDS.map(({ name }) => {
+    formFields.map(({ name }) => {
         if (!values[name]) {
             errors[name] = `You must provide ${name}`
         }
     });
 
-    // const message = validateEmails(values.emails);
-    errors.emails = validateEmails(values.emails || '')
+    errors.recipients = validateEmails(values.recipients || '');
     return errors
 };
+
+const mapDispatchToProps = dispatch => ({
+
+});
+
+SurveyForm = connect(null, mapDispatchToProps)(SurveyForm);
 
 export default reduxForm({
     form : 'surveyForm',
