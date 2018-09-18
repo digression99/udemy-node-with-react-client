@@ -47,6 +47,4 @@ const mapStateToProps = state => {
     }
 };
 
-// SurveyFormReview = connect(mapStateToProps, actions);
-
 export default connect(mapStateToProps, actions)(withRouter(SurveyFormReview));

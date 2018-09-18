@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Field, reset } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import SurveyField from './SurveyField';
 import { Link } from 'react-router-dom';
 import validateEmails from '../../utils/validateEmails';
@@ -66,11 +66,7 @@ const validate = values => {
     return errors
 };
 
-const mapDispatchToProps = dispatch => ({
-
-});
-
-SurveyForm = connect(null, mapDispatchToProps)(SurveyForm);
+SurveyForm = connect()(SurveyForm);
 
 export default reduxForm({
     form : 'surveyForm',
